@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>linked-list</title>
+</head>
+<body>
+    <script>
+        class Node {
+            constructor (value) {
+                this.value = null;
+                this.next = null;
+            }
+        }         
+        class LinkedList {
+            constructor () {
+                this.head = null;
+            };
+
+            append(value) {
+                let newNode = new Node();
+                let currentNode = this.head;
+
+                if (!currentNode) {
+                    newNode.value = value;
+                    this.head = newNode;
+                } else if (currentNode) {
+                    while (currentNode.next) {
+                        currentNode = currentNode.next;
+                    }
+                    newNode.value = value;
+                    currentNode.next = newNode;
+                };
+            }
+
+            prepend(value) {
+                let newHead = new Node();
+                newHead.value = value;
+
+                if (this.head) {
+                    let currentHead = this.head;
+                    newHead.next = currentHead;
+                    this.head = newHead;
+                } else if (!this.head) {
+                    this.head = newHead;
+                }
+            }
+
+            size() {
+                let currentNode = this.head;
+                let nodeSize = 0;
+                
+                if (currentNode) {
+                    while (currentNode.next) {
+                        currentNode = currentNode.next;
+                        nodeSize++;
+                    }
+                } 
+                console.log(nodeSize);
+            }
+
+            findHead() {
+                let currentHead = this.head;
+                console.log(currentHead);
+            }
+
+            findTail() {
+                let currentNode = this.head;
+                if (currentNode) {
+                    while (currentNode.next) {
+                        currentNode = currentNode.next;
+                    }
+                    console.log(currentNode);
+                }
+            }
+
+            at(index) {
+                let currentNode = this.head;
+                let nodeIndex = 0;
+                
+                if (currentNode) {
+                    while (currentNode.next && nodeIndex < index - 1) {
+                        currentNode = currentNode.next;
+                        nodeIndex++;
+                    }
+                     console.log(currentNode);
+                    
+                } 
+            }
+
+            pop() {
+                let currentNode = this.head;
+                
+                if (currentNode) {
+                    while (currentNode.next.next) {
+                        currentNode = currentNode.next;
+                    }
+
+                    let poppedNode = currentNode.next;
+                    console.log(poppedNode);
+                    currentNode.next = null;
+
+                    console.log(this);
+                    
+
+                }
+            }
+
+            contains(value) {
+                let currentNode = this.head;
+
+                if (currentNode) {
+                    while (currentNode.next && value !== currentNode.value) {
+                        currentNode = currentNode.next;
+                    }
+                    if (currentNode.value == value) {
+                        console.log(true);
+                    } else {
+                        console.log(false);
+                    }
+                }
+            }
+
+            find(value) {
+                let currentNode = this.head;
+                let nodeIndex = 1;
+
+                if (currentNode) {
+                    while (currentNode.next && value !== currentNode.value) {
+                        currentNode = currentNode.next;
+                        nodeIndex++;
+                    }
+                    if (value == currentNode.value) {
+                        console.log(nodeIndex);
+                    } else {
+                        console.log(null);
+                    }
+                }
+            }
+
+            toString() {
+                let currentNode = this.head;
+                let result = 'list: '
+
+                if (currentNode) {
+                    while (currentNode !== null) {
+                        result += currentNode.value + ', ';
+                        currentNode = currentNode.next;
+                    }
+
+                    result += null
+                }
+                console.log(result);
+            }
+
+            insertAt(index, value) {
+                let currentNode = this.head;
+                let nodeIndex = 1;
+                let previousNode;
+                
+                if(currentNode) {
+                    while (currentNode.next && nodeIndex < index) {
+                        previousNode = currentNode;
+                        currentNode = currentNode.next;
+                        nodeIndex++;
+                    }
+
+                    let newNode = new Node();
+                    newNode.value = value;
+
+                    previousNode.next = newNode;
+                    newNode.next = currentNode;
+                }
+            }
+
+            removeAt(index) {
+                let currentNode = this.head;
+                let nodeIndex = 1;
+                let previousNode;
+                let nextNode;
+
+                if (currentNode) {
+                    while (currentNode.next && nodeIndex < index) {
+                        previousNode = currentNode;
+                        currentNode = currentNode.next;
+                        nextNode = currentNode.next;
+                        nodeIndex++;
+                    }
+
+                    previousNode.next = nextNode;
+
+                }
+            }
+
+        }
+
+        let list = new LinkedList();
+
+    </script>
+</body>
+</html>
